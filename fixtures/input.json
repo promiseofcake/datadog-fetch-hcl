@@ -1,0 +1,86 @@
+{
+  "dash": {
+    "read_only": false,
+    "description": "Search Service",
+    "created": "2016-03-24T05:46:04.571245+00:00",
+    "title": "Search Service",
+    "modified": "2017-05-19T19:01:52.138995+00:00",
+    "graphs": [
+      {
+        "definition": {
+          "viz": "timeseries",
+          "status": "done",
+          "requests": [
+            {
+              "q": "per_second(avg:elasticsearch.search.query.total{$ENV,$CLUSTER})",
+              "aggregator": "avg",
+              "conditional_formats": [],
+              "type": "line"
+            }
+          ],
+          "autoscale": true
+        },
+        "title": "QPS"
+      },
+      {
+        "definition": {
+          "viz": "timeseries",
+          "requests": [
+            {
+              "q": "sum:search_api.related_images.search.count{$ENV}.as_rate()",
+              "conditional_formats": [],
+              "type": "line"
+            },
+            {
+              "q": "sum:search.api.http.get.2_0.search.images.id.related.count{$ENV}.as_rate()",
+              "type": "line"
+            }
+          ],
+          "autoscale": true
+        },
+        "title": "Related Image RPS to Store Search RPS (hitpass)"
+      },
+      {
+        "definition": {
+          "precision": "1",
+          "viz": "query_value",
+          "requests": [
+            {
+              "q": "max:elasticsearch.cluster_status{$ENV,role:seasug-es-master}",
+              "aggregator": "last",
+              "conditional_formats": [
+                {
+                  "palette": "white_on_green",
+                  "comparator": ">=",
+                  "value": 2
+                },
+                {
+                  "palette": "white_on_yellow",
+                  "comparator": ">=",
+                  "value": 1
+                },
+                {
+                  "palette": "white_on_red",
+                  "comparator": ">=",
+                  "value": "0"
+                }
+              ],
+              "type": "line"
+            }
+          ]
+        },
+        "title": "Conditional Format Query Value"
+      }
+    ],
+    "template_variables": [
+      {
+        "default": "environment:prod",
+        "prefix": "environment",
+        "name": "ENV"
+      }
+    ],
+    "id": 110669
+  },
+  "url": "/dash/110669/search-service",
+  "resource": "/api/v1/dash/110669"
+}
