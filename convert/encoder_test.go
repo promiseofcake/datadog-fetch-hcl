@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"testing"
 
+	"github.com/rodaine/hclencoder"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -14,7 +15,7 @@ func TestEncodeToHCL(t *testing.T) {
 	dash, err := DecodeFromAPI(bts)
 	assert.NoError(t, err)
 
-	_, err = EncodeToHCL(dash)
+	_, err = hclencoder.Encode(dash)
 	assert.NoError(t, err)
 
 	// TODO ensure that we can re-code from the HCL into the appropriate structs

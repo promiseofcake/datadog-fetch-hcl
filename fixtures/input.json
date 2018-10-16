@@ -18,7 +18,13 @@
               "type": "line"
             }
           ],
-          "autoscale": true
+          "autoscale": true,
+          "events": [
+            {
+              "q": "dcdr-rps-value",
+              "tags_execution": "and"
+            }
+          ]
         },
         "title": "QPS"
       },

@@ -1,12 +1,9 @@
 package client
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-
-	"github.com/promiseofcake/datadog-fetch-hcl/convert"
 )
 
 type Client interface {
@@ -27,7 +24,7 @@ func NewDataDog(apiKey, appKey string) *DataDogClient {
 	}
 }
 
-func (d *DataDogClient) GetDashboard(id int) (*convert.Dashboard, error) {
+func (d *DataDogClient) FetchJSON(id int) ([]byte, error) {
 	url := fmt.Sprintf(
 		"%s/%d?api_key=%s&application_key=%s",
 		ddDashboardAPIUrl,
@@ -48,16 +45,14 @@ func (d *DataDogClient) GetDashboard(id int) (*convert.Dashboard, error) {
 	}
 	defer res.Body.Close()
 
-	if res.StatusCode != http.StatusOK {
-		bts, _ := ioutil.ReadAll(res.Body)
-		return nil, fmt.Errorf("API Call: %s", bts)
-	}
-
-	dash := &convert.Dashboard{}
-	err = json.NewDecoder(res.Body).Decode(dash)
+	bts, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return nil, err
 	}
 
-	return dash, err
+	if res.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("API Call: %s", bts)
+	}
+
+	return bts, nil
 }
