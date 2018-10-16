@@ -30,6 +30,7 @@ type GraphDefinition struct {
 	AutoScale bool      `json:"autoscale,omitempty" hcl:"autoscale" hcle:"omitempty"`
 	Precision string    `json:"precision,omitempty" hcl:"precision" hcle:"omitempty"`
 	Requests  []Request `json:"requests" hcl:"request"`
+	Events    []Event   `json:"events" hcl:"events" hcle:"omit"`
 }
 
 type GraphStyle struct {
@@ -56,4 +57,8 @@ type ConditionalFormat struct {
 	Palette    string      `json:"palette,omitempty" hcl:"palette" hcle:"omitempty"`
 	Comparator string      `json:"comparator,omitempty" hcl:"comparator" hcle:"omitempty"`
 	Value      json.Number `json:"value,omitempty" hcl:"value" hcle:"omitempty"`
+}
+
+type Event struct {
+	Q string `json:"q" hcle:"omit"`
 }
