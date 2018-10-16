@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/promiseofcake/hclencoder"
 	"github.com/promiseofcake/datadog-fetch-hcl/client"
+	"github.com/rodaine/hclencoder"
 )
 
 const (

@@ -22,8 +22,9 @@
 
 
 [[constraint]]
-  name = "github.com/promiseofcake/hclencoder"
-  revision = "3c2ec0c063bb8a629c5e70bf082c78f04203b680"
+  name = "github.com/rodaine/hclencoder"
+  source = "https://github.com/rodaine/hclencoder.git"
+  revision = "0680c4321930791057b48e9ada37554d1857555f"
 
 [[constraint]]
   name = "github.com/stretchr/testify"

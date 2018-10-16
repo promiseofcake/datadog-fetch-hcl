@@ -33,11 +33,12 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:4638da2d34c62b041b87a9741d8ed117172a6320f769d0ded7fc074426f5fd1c"
-  name = "github.com/promiseofcake/hclencoder"
+  digest = "1:dcab7c57fd426f84dfa591f77b3ebd6696227453beeb0ad8295394c7ddd3035b"
+  name = "github.com/rodaine/hclencoder"
   packages = ["."]
   pruneopts = ""
-  revision = "3c2ec0c063bb8a629c5e70bf082c78f04203b680"
+  revision = "0680c4321930791057b48e9ada37554d1857555f"
+  source = "https://github.com/rodaine/hclencoder.git"
 
 [[projects]]
   digest = "1:c587772fb8ad29ad4db67575dad25ba17a51f072ff18a22b4f0257a4d9c24f75"
@@ -51,7 +52,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
-    "github.com/promiseofcake/hclencoder",
+    "github.com/rodaine/hclencoder",
     "github.com/stretchr/testify/assert",
   ]
   solver-name = "gps-cdcl"
