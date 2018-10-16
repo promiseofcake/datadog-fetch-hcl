@@ -2,37 +2,57 @@
 
 
 [[projects]]
+  digest = "1:0deddd908b6b4b768cfc272c16ee61e7088a60f7fe2f06c547bd3d8e1f8b8e77"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
-  revision = "346938d642f2ec3594ed81d874461961cd0faa76"
-  version = "v1.1.0"
+  pruneopts = ""
+  revision = "8991bc29aa16c548c550c7ff78260e27b9ab7c73"
+  version = "v1.1.1"
 
 [[projects]]
-  branch = "master"
+  digest = "1:d14365c51dd1d34d5c79833ec91413bfbb166be978724f15701e17080dc06dec"
   name = "github.com/hashicorp/hcl"
-  packages = ["hcl/ast","hcl/parser","hcl/printer","hcl/scanner","hcl/strconv","hcl/token"]
-  revision = "23c074d0eceb2b8a5bfdbb271ab780cde70f05a8"
+  packages = [
+    "hcl/ast",
+    "hcl/parser",
+    "hcl/printer",
+    "hcl/scanner",
+    "hcl/strconv",
+    "hcl/token",
+  ]
+  pruneopts = ""
+  revision = "8cb6e5b959231cc1119e43259c4a608f9c51a241"
+  version = "v1.0.0"
 
 [[projects]]
+  digest = "1:256484dbbcd271f9ecebc6795b2df8cad4c458dd0f5fd82a8c2fa0c29f233411"
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
+  pruneopts = ""
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:4638da2d34c62b041b87a9741d8ed117172a6320f769d0ded7fc074426f5fd1c"
   name = "github.com/promiseofcake/hclencoder"
   packages = ["."]
+  pruneopts = ""
   revision = "3c2ec0c063bb8a629c5e70bf082c78f04203b680"
 
 [[projects]]
+  digest = "1:c587772fb8ad29ad4db67575dad25ba17a51f072ff18a22b4f0257a4d9c24f75"
   name = "github.com/stretchr/testify"
   packages = ["assert"]
-  revision = "69483b4bd14f5845b5a1e55bca19e954e827f1d0"
-  version = "v1.1.4"
+  pruneopts = ""
+  revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
+  version = "v1.2.2"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6abf16d225355df7a4d7cb4940ac64bd1594c456eaca3ee0b3d90be69baef1fb"
+  input-imports = [
+    "github.com/promiseofcake/hclencoder",
+    "github.com/stretchr/testify/assert",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
