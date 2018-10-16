@@ -18,10 +18,6 @@ resource "datadog_timeboard" "search_service" {
       q = "sum:search_api.related_images.search.count{$ENV}.as_count()"
       type = "line"
     }
-
-    events = [
-      "dcdr-rps-value"
-    ]
   }
 
   graph {
