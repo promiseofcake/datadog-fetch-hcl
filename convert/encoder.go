@@ -1,7 +1,16 @@
 package convert
 
-import "github.com/rodaine/hclencoder"
+import (
+	"encoding/json"
+)
 
-func EncodeToHCL(d *Dashboard) ([]byte, error) {
-	return hclencoder.Encode(d)
+func BuildDashbard(bts []byte) (*Dashboard, error) {
+	dash := &Dashboard{}
+
+	err := json.Unmarshal(bts, dash)
+	if err != nil {
+		return nil, err
+	} else {
+		return dash, nil
+	}
 }
