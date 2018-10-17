@@ -30,7 +30,7 @@ type GraphDefinition struct {
 	AutoScale bool      `json:"autoscale,omitempty" hcl:"autoscale" hcle:"omitempty"`
 	Precision string    `json:"precision,omitempty" hcl:"precision" hcle:"omitempty"`
 	Requests  []Request `json:"requests" hcl:"request"`
-	Events    []Event   `json:"events" hcl:"events" hcle:"omit"`
+	Events    []Event   `json:"events" hcl:"events" hcle:"omitempty"`
 }
 
 type GraphStyle struct {
@@ -39,8 +39,8 @@ type GraphStyle struct {
 }
 
 type Request struct {
-	Q string `json:"q" hcl:"q"`
-	//Aggregator string       `json:"aggregator,omitempty" hcl:"aggregator" hcle:"omitempty"`
+	Q                  string              `json:"q" hcl:"q"`
+	Aggregator         string              `json:"aggregator,omitempty" hcl:"aggregator" hcle:"omitempty"`
 	Stacked            bool                `json:"stacked,omitempty" hcl:"stacked" hcle:"omitempty"`
 	Type               string              `json:"type,omitempty" hcl:"type" hcle:"omitempty"`
 	Style              RequestStyle        `json:"style,omitempty" hcl:"style" hcle:"omitempty"`
@@ -60,5 +60,5 @@ type ConditionalFormat struct {
 }
 
 type Event struct {
-	Q string `json:"q" hcle:"omit"`
+	Q string `json:"q" hcl:"q" hcle:"omitempty"`
 }
