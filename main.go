@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/promiseofcake/datadog-fetch-hcl/client"
@@ -29,7 +30,7 @@ func main() {
 
 	id := flag.Int("id", 0, "Dashboard ID to retrieve")
 	title := flag.String("title", "", "Dashboard Title for TF definition")
-	debug := flag.Bool("debug", false, "Debug Datadog API Output")
+	debug := flag.Bool("debug", false, "Debug Datadog API Output to stderr")
 	flag.Parse()
 
 	bts, err := dd.FetchJSON(*id)
@@ -55,12 +56,23 @@ func main() {
 		log.Fatalf("Error encoding Dashboard: %s", err)
 	}
 
+	var result string
+
 	// hackery to build the dual string resource HCL
-	hcl := processHCL(out, *title)
-	fmt.Printf("\n%s", hcl)
+	result = processResourceTitle(out, *title)
+
+	// hackery to process events data
+	result = processEvents(result)
+
+	fmt.Printf("%s", result)
 }
 
-func processHCL(bts []byte, title string) string {
+func processResourceTitle(bts []byte, title string) string {
 	replace := fmt.Sprintf("resource \"datadog_timeboard\" \"%s\"", title)
 	return strings.Replace(string(bts), "resource", replace, 1)
+}
+
+func processEvents(hcl string) string {
+	match := regexp.MustCompile(`events\s{\n\s+q\s=\s(.*)\n\s+}`)
+	return match.ReplaceAllString(hcl, `events = [$1]`)
 }
