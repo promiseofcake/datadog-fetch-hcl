@@ -1,6 +1,10 @@
 package convert
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/zorkian/go-datadog-api"
+)
 
 type Dashboard struct {
 	Dash `json:"dash" hcl:"resource"`
@@ -26,11 +30,11 @@ type Graph struct {
 }
 
 type GraphDefinition struct {
-	Viz       string    `json:"viz" hcl:"viz"`
-	AutoScale bool      `json:"autoscale,omitempty" hcl:"autoscale" hcle:"omitempty"`
-	Precision string    `json:"precision,omitempty" hcl:"precision" hcle:"omitempty"`
-	Requests  []Request `json:"requests" hcl:"request"`
-	Events    []Event   `json:"events" hcl:"events" hcle:"omitempty"`
+	Viz       string             `json:"viz" hcl:"viz"`
+	AutoScale bool               `json:"autoscale,omitempty" hcl:"autoscale" hcle:"omitempty"`
+	Precision datadog.PrecisionT `json:"precision,omitempty" hcl:"precision" hcle:"omitempty"`
+	Requests  []Request          `json:"requests" hcl:"request"`
+	Events    []Event            `json:"events" hcl:"events" hcle:"omitempty"`
 }
 
 type GraphStyle struct {

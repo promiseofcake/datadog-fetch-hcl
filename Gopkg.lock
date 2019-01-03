@@ -2,6 +2,14 @@
 
 
 [[projects]]
+  digest = "1:27a0ba2be705618c3a7015ad9641635c1c4a552175576149d57bb9cf71cb0513"
+  name = "github.com/cenkalti/backoff"
+  packages = ["."]
+  pruneopts = ""
+  revision = "62661b46c4093e2c1f38d943e663db1a29873e80"
+  version = "v2.1.0"
+
+[[projects]]
   digest = "1:0deddd908b6b4b768cfc272c16ee61e7088a60f7fe2f06c547bd3d8e1f8b8e77"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
@@ -48,12 +56,20 @@
   revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
   version = "v1.2.2"
 
+[[projects]]
+  digest = "1:7edfda530f7530c93ca586729c4ab8fef99fe07f8f136ad0a2b920efbedaf40a"
+  name = "github.com/zorkian/go-datadog-api"
+  packages = ["."]
+  pruneopts = ""
+  revision = "1df5bda80d16ccfa8e99c543dbeb731665acbfca"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
     "github.com/rodaine/hclencoder",
     "github.com/stretchr/testify/assert",
+    "github.com/zorkian/go-datadog-api",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -48,7 +48,7 @@
       },
       {
         "definition": {
-          "precision": "1",
+          "precision": 1,
           "viz": "query_value",
           "requests": [
             {
