@@ -50,3 +50,46 @@ func TestGraphDefinitionDecoder(t *testing.T) {
 		assert.EqualValues(t, test.expected, gd)
 	}
 }
+
+func float64Pointer(v float64) *float64 {
+	return &v
+}
+
+func stringPointer(v string) *string {
+	return &v
+}
+
+func TestYaxisDecoder(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected *Yaxis
+	}{
+		{
+			input:    `{"min":"auto", "max":"auto"}`,
+			expected: &Yaxis{},
+		},
+		{
+			input:    `{"min":"0"}`,
+			expected: &Yaxis{Min: float64Pointer(0)},
+		},
+		{
+			input:    `{"min":"1"}`,
+			expected: &Yaxis{Min: float64Pointer(1)},
+		},
+		{
+			input:    `{"max":"100"}`,
+			expected: &Yaxis{Max: float64Pointer(100)},
+		},
+		{
+			input:    `{"max":"100","scale":"log"}`,
+			expected: &Yaxis{Max: float64Pointer(100), Scale: stringPointer("log")},
+		},
+	}
+
+	for _, test := range tests {
+		y := &Yaxis{}
+		err := json.Unmarshal([]byte(test.input), y)
+		assert.NoError(t, err)
+		assert.EqualValues(t, test.expected, y)
+	}
+}

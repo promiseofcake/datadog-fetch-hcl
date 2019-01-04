@@ -35,6 +35,56 @@ type GraphDefinition struct {
 	Precision datadog.PrecisionT `json:"precision,omitempty" hcl:"precision" hcle:"omitempty"`
 	Requests  []Request          `json:"requests" hcl:"request"`
 	Events    []Event            `json:"events" hcl:"events" hcle:"omitempty"`
+	Yaxis     Yaxis              `json:"yaxis,omitempty" hcl:"yaxis" hcle:"omitempty"`
+}
+
+// copied from https://github.com/zorkian/go-datadog-api due to custom unmarshalling
+// we need to duplicate due to custom HCL marshalling
+// TODO: use zorkian/go-datadog-api entirely and build a "to our struct" function
+type Yaxis struct {
+	Min   *float64 `json:"min,omitempty" hcl:"min" hcle:"omitempty"`
+	Max   *float64 `json:"max,omitempty" hcl:"max" hcle:"omitempty"`
+	Scale *string  `json:"scale,omitempty" hcl:"scale" hcle:"omitempty"`
+}
+
+func (y *Yaxis) UnmarshalJSON(data []byte) error {
+	type Alias Yaxis
+	wrapper := &struct {
+		Min *json.Number `json:"min,omitempty"`
+		Max *json.Number `json:"max,omitempty"`
+		*Alias
+	}{
+		Alias: (*Alias)(y),
+	}
+
+	if err := json.Unmarshal(data, &wrapper); err != nil {
+		return err
+	}
+
+	if wrapper.Min != nil {
+		if *wrapper.Min == "auto" {
+			y.Min = nil
+		} else {
+			f, err := wrapper.Min.Float64()
+			if err != nil {
+				return err
+			}
+			y.Min = &f
+		}
+	}
+
+	if wrapper.Max != nil {
+		if *wrapper.Max == "auto" {
+			y.Max = nil
+		} else {
+			f, err := wrapper.Max.Float64()
+			if err != nil {
+				return err
+			}
+			y.Max = &f
+		}
+	}
+	return nil
 }
 
 type GraphStyle struct {
