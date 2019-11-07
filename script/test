@@ -1,25 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
-FMT_ERRS=$(gofmt -l . 2>&1 | tee /dev/tty | wc -l)
-if [ "$FMT_ERRS" -gt "0" ]; then
-  echo "$FMT_ERRS Lint error(s) found in above file(s)."
-  exit 1
-fi
+diff -u <(echo -n) <(gofmt -d -s .) 2>&1
 echo "ok gofmt"
 
-VET_ERRS=$(go vet -all $pkgs 2>&1 | tee /dev/tty | wc -l)
-if [ "$VET_ERRS" -gt "0" ]; then
-  echo "$VET_ERRS Vet error(s) found above."
-  exit 1
-fi
+go vet ./...
 echo "ok go vet"
 
-go test -race ./... -cover $TARGET
-if [ "$?" -ne "0" ]; then
-  echo "Unit tests FAIL"
-  exit 1
-fi
+go test -race ./... -cover
 echo "ok go test"
 
 exit 0
