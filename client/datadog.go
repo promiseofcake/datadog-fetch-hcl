@@ -24,9 +24,9 @@ func NewDataDog(apiKey, appKey string) *DataDogClient {
 	}
 }
 
-func (d *DataDogClient) FetchJSON(id int) ([]byte, error) {
+func (d *DataDogClient) FetchJSON(id string) ([]byte, error) {
 	url := fmt.Sprintf(
-		"%s/%d?api_key=%s&application_key=%s",
+		"%s/%s?api_key=%s&application_key=%s",
 		ddDashboardAPIUrl,
 		id,
 		d.apiKey,

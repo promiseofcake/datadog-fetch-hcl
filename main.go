@@ -28,7 +28,7 @@ func main() {
 	}
 	dd := client.NewDataDog(apiKey, appKey)
 
-	id := flag.Int("id", 0, "Dashboard ID to retrieve")
+	id := flag.String("id", "0", "Dashboard ID to retrieve")
 	title := flag.String("title", "", "Dashboard Title for TF definition")
 	debug := flag.Bool("debug", false, "Debug Datadog API Output to stderr")
 	flag.Parse()
