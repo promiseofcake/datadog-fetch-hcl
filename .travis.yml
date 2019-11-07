@@ -15,3 +15,4 @@ notifications:
 branches:
   only:
   - master
+  - v2.0
